@@ -9,13 +9,17 @@ public class Estacionamento {
 			throw new Exception("Número de vagas inválido."); // Deve ser de ao menos 1.
 		}
 		placas = new String[vagas]; // Define o número de vagas do estacionamento.
+		
+		for (int i = 0; i < placas.length; i++) {
+			placas[i] = "livre";
+		}
 	}
 	
 	public void entrar(String placa, int vaga) throws Exception {
 		if (vaga-1 < 0 || vaga-1 > placas.length ) { // Checa se a vaga existe.
 			throw new Exception("Número de vaga inválido.");
 		}
-		else if (!(placas[vaga-1].equals(null))) { // Checa se a vaga está livre.
+		else if (!(placas[vaga-1].equals("livre"))) { // Checa se a vaga está livre.
 			throw new Exception("Vaga não está livre.");
 		}
 		
@@ -26,11 +30,11 @@ public class Estacionamento {
 		if (vaga-1 < 0 || vaga-1 > placas.length ) { // Verifica se a vaga existe.
 			throw new Exception("Número de vaga inválido.");
 		}
-		else if (placas[vaga-1].equals(null)) { // Verifica se a vaga estava ocupada.
+		else if (placas[vaga-1].equals("livre")) { // Verifica se a vaga estava ocupada.
 			throw new Exception("Vaga não está ocupada.");
 		}
 		
-		placas[vaga-1] = null; // Caso passe nos testes a vaga é liberada.
+		placas[vaga-1] = "livre"; // Caso passe nos testes a vaga é liberada.
 	}
 	
 	public int consultarPlaca(String placa) {
@@ -43,10 +47,10 @@ public class Estacionamento {
 	}
 	
 	public void transferir(int vaga1, int vaga2) throws Exception{
-		if (!(placas[vaga1-1].equals(null))) { // Checa se a vaga1 está ocupada.
-			if (placas[vaga2-1].equals(null)) { // Checa se a vaga2 está livre.
+		if (!(placas[vaga1-1].equals("livre"))) { // Checa se a vaga1 está ocupada.
+			if (placas[vaga2-1].equals("livre")) { // Checa se a vaga2 está livre.
 				placas[vaga2-1] = placas[vaga1-1]; // Realiza a transferência para vaga2
-				placas[vaga1-1] = null; // Libera a vaga1.
+				placas[vaga1-1] = "livre"; // Libera a vaga1.
 			}
 		}
 		else {
@@ -58,7 +62,7 @@ public class Estacionamento {
 		String[] listagem = new String[placas.length]; // Inicializa a lista a ser exibida.
 		
 		for (int i = 0; i < placas.length; i++) {
-			if (placas[i].equals(null)) { // Testa se a vaga está livre.
+			if (placas[i].equals("livre")) { // Testa se a vaga está livre.
 				listagem[i] = "livre";
 			}
 			else { // Caso ocupada, insere a placa ocupante da vaga.
@@ -72,7 +76,7 @@ public class Estacionamento {
 		ArrayList<Integer> listagemLivre = new ArrayList<>(); // Inicializa a lista a ser exibida.
 		
 		for (int i = 0; i < placas.length; i++) {
-			if (placas[i].equals(null)) { // Testa se a vaga está livre
+			if (placas[i].equals("livre")) { // Testa se a vaga está livre
 				listagemLivre.add(i);
 			}
 		}
