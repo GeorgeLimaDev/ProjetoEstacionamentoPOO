@@ -47,10 +47,13 @@ public class Estacionamento {
 	}
 	
 	public void transferir(int vaga1, int vaga2) throws Exception{
-		if (!(placas[vaga1-1].equals("livre"))) { // Checa se a vaga1 está ocupada.
-			if (placas[vaga2-1].equals("livre")) { // Checa se a vaga2 está livre.
-				placas[vaga2-1] = placas[vaga1-1]; // Realiza a transferência para vaga2
-				placas[vaga1-1] = "livre"; // Libera a vaga1.
+		if (vaga1 == vaga2) {
+			throw new Exception("Tentativa de mover para a mesma posição.");
+		}
+		else if (!(placas[vaga1-1].equals("livre"))) { // Checa se a vaga1 está ocupada.
+				if (placas[vaga2-1].equals("livre")) { // Checa se a vaga2 está livre.
+					placas[vaga2-1] = placas[vaga1-1]; // Realiza a transferência para vaga2
+					placas[vaga1-1] = "livre"; // Libera a vaga1.
 			}
 		}
 		else {
@@ -77,7 +80,7 @@ public class Estacionamento {
 		
 		for (int i = 0; i < placas.length; i++) {
 			if (placas[i].equals("livre")) { // Testa se a vaga está livre
-				listagemLivre.add(i);
+				listagemLivre.add(i+1);
 			}
 		}
 		return listagemLivre;
