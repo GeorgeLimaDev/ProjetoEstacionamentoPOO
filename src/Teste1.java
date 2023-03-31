@@ -2,7 +2,7 @@
  * TSI - POO - Prof fausto Ayres
  * Teste da classe Estacionamento
  */
-public class Teste1 {
+public class AplicacaoConsole1 {
 
 	public static void main(String[] args) {
 		try {
@@ -42,10 +42,10 @@ public class Teste1 {
 				System.out.println(i);
 			}
 
-			//System.out.println("gravar dados no arquivo");
-			//estacionamento.gravarDados();
-			//System.out.println("ler dados do arquivo");
-			//estacionamento.lerDados();
+			System.out.println("gravar dados no arquivo");
+			estacionamento.gravarDados();
+			System.out.println("ler dados do arquivo");
+			estacionamento.lerDados();
 			
 			System.out.println("listar vagas geral");
 			for(String s : estacionamento.listarGeral()) {

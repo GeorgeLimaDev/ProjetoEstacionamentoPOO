@@ -22,8 +22,30 @@ public class Estacionamento {
 		}
 	}
 	
+	//Método para validar placa, só permite placas no formato XXX0000.
+	public boolean validarPlaca(String placa) {
+		boolean valido = true;
+		
+		if(placa.length() != 7) {
+			valido = false;
+		} //Verifica se a placa possui 7 dígitos.
+		
+		if(!placa.substring(0,3).matches("[A-Z]*")) {
+			valido = false;
+		} //Verifica se os 3 primeiros dígitos da placa são letras.
+		if(!placa.substring(3).matches("[0-9]*")) {
+			valido = false;
+		} //Verifica se os últimos 4 dígitos são números.
+		
+		return valido;
+	}
 	
 	public void entrar(String placa, int vaga) throws Exception {
+		
+		if(validarPlaca(placa) == false) { //Validação da placa (verifica se ela tem 7 dígitos, sendo os 3 primeiros números e os 4 últimos letras). 
+			throw new Exception("Vaga inválida, a vaga deve ter formato XXX0000");
+		}
+		
 		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Checa se a vaga existe.
 			throw new Exception("Número de vaga fora do limite do estacionamento, escolha uma vaga entre 1 e " + placas.length);
 		}

@@ -5,18 +5,13 @@
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
-public class Teste3 {
+public class AplicacaoConsole3 {
 	public static void main(String[] args) {
 		Estacionamento estacionamento = null;
-		try {
-			estacionamento = new Estacionamento(10);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}	//10 vagas
 		
 		try {
-			//estacionamento.lerDados();
+			estacionamento = new Estacionamento(10);	//10 vagas
+			estacionamento.lerDados();
 		} 
 		catch(Exception e) {
 			System.out.println(e.getMessage());
@@ -103,9 +98,11 @@ public class Teste3 {
 		}while(op != 0);
 
 		teclado.close();
+		
 		try {
-			//estacionamento.gravarDados();
-		} catch (Exception e) {
+			estacionamento.gravarDados();
+		} 
+		catch (Exception e) {
 			System.out.println(e.getMessage());;
 		}
 
