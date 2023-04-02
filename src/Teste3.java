@@ -5,7 +5,7 @@
 import java.util.Scanner;
 import java.time.LocalDateTime;
 
-public class AplicacaoConsole3 {
+public class Teste3 {
 	public static void main(String[] args) {
 		Estacionamento estacionamento = null;
 		

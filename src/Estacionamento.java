@@ -3,8 +3,8 @@ import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
+
 
 public class Estacionamento {
 	
@@ -22,28 +22,41 @@ public class Estacionamento {
 		}
 	}
 	
-	//Método para validar placa, só permite placas no formato XXX0000.
-	public boolean validarPlaca(String placa) {
-		boolean valido = true;
-		
+	//Método para validar placa, só permite placas no formato YYY0000 ou YYY0X00"
+	private boolean validarPlaca(String placa) {
 		if(placa.length() != 7) {
-			valido = false;
+			return false;
 		} //Verifica se a placa possui 7 dígitos.
 		
-		if(!placa.substring(0,3).matches("[A-Z]*")) {
-			valido = false;
-		} //Verifica se os 3 primeiros dígitos da placa são letras.
-		if(!placa.substring(3).matches("[0-9]*")) {
-			valido = false;
-		} //Verifica se os últimos 4 dígitos são números.
+		String letras = placa.substring(0,3);
+		String numeros = placa.substring(3,4) + placa.substring(5);
+		String letraOuNumero = placa.substring(4,5);
 		
-		return valido;
+		System.out.println(letras + numeros + ":" + letraOuNumero);
+		
+		
+		if(! letras.matches("[A-Z]*")) {
+			return false;
+		} //Verifica se os 3 primeiros dígitos da placa são letras.
+		
+		
+		if(! numeros.matches("[0-9]*")) {
+			return false;
+		} //Verifica se o 4º digito e os 2 ultimos digitos são números.
+		
+		if (letraOuNumero.matches("[A-Z]*") || letraOuNumero.matches("[0-9]*"))
+			return true;
+		//Verifica se o 5º digito é número (placa antiga) ou letra (placa nova), se sim, a placa já foi 100% validada e retorna true.
+		
+		return false; //Se falhar na última validacao retorna false.
 	}
 	
+	
 	public void entrar(String placa, int vaga) throws Exception {
+		placa = placa.toUpperCase();
 		
-		if(validarPlaca(placa) == false) { //Validação da placa (verifica se ela tem 7 dígitos, sendo os 3 primeiros números e os 4 últimos letras). 
-			throw new Exception("Vaga inválida, a vaga deve ter formato XXX0000");
+		if(! validarPlaca(placa)) { //Validação da placa (verifica se ela tem formato YYY0000 ou YYY0X00"). 
+			throw new Exception("Placa inválida, a placa deve ter formato YYY0000 ou YYY0X00");
 		}
 		
 		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Checa se a vaga existe.
@@ -89,6 +102,8 @@ public class Estacionamento {
 	
 	
 	public int consultarPlaca(String placa) {
+		placa = placa.toUpperCase();
+		
 		for (int i = 0; i < placas.length; i++) { // Percorre as vagas.
 			if (placas[i].equals(placa)) { // Testa se é a vaga onde está a placa informada.
 				return i+1; // Retorna o número da vaga.
@@ -178,13 +193,22 @@ public class Estacionamento {
 		
 			while(arquivo.hasNextLine()) { 
 				String[] vagaPlaca = arquivo.nextLine().split(";"); // Salva um conjunto vaga;placa em um array
-				System.out.println("Vaga/Placa: " + Arrays.toString(vagaPlaca)); // Temporariamente um print ate descobrir o q fazer
+				int vaga = Integer.parseInt(vagaPlaca[0]);
 				
+				if (vaga > placas.length) {
+					break; // N faz nada, o estacionamento terá menos carros, lide-se com isso :P
+				}
+				
+				placas[vaga - 1] = vagaPlaca[1]; 
+					
 			}
+			
+			arquivo.close();
 			
 		} catch (Exception e) {
 			try {
 				FileWriter arquivo = new FileWriter(new File("placas.csv")); //Cria arquivo caso n exista
+				arquivo.close();
 				
 			} catch (Exception e2) {
 				// Nào sei o que por aqui. O que diabos poderia causar uma excecao nisso?

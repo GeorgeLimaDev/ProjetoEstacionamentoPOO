@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -17,8 +15,14 @@ public class TestesIan {
 		
 	
 		Estacionamento e1 = new Estacionamento(10);
-		e1.entrar("as", 1);
-		e1.entrar("asad", 5);
+		System.out.println("\n");
+		e1.entrar("YYY1T11", 1);
+		e1.entrar("ZZZ1S22", 5);
+		e1.entrar("ZZZ1422", 7);
+		e1.entrar("ZZZ1922", 9);
+		e1.entrar("zzz1f22", 8);
+		System.out.println("\n");
+		
 		String[] safadenho = e1.listarGeral();
 		
 		for (int i = 0; i < safadenho.length; i++) {
@@ -56,15 +60,27 @@ public class TestesIan {
 		/*
 		try {
 			FileWriter arquivo = new FileWriter("arquivo.csv");
-			arquivo.write("as");
+			
+			for (int i = 0; i < 200000; i++)
+				arquivo.write(i + "\n");
+			
+			
 			arquivo.close();
 			System.out.println("deu certo");
+			
 		} catch (Exception e) {
 			System.out.println("pena");
 		}*/
 		
 		e1.gravarDados();
 		e1.lerDados();
+		
+		String placa = "bee4R22";
+		String s3 = placa.substring(5);
+		System.out.println(s3);
+		System.out.println(placa.toUpperCase());
+		
+		
 	}
 
 }

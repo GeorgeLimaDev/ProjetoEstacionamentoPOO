@@ -2,7 +2,7 @@
  * TSI - POO - Prof fausto Ayres
  * Teste da classe Estacionamento
  */
-public class AplicacaoConsole2 {
+public class Teste2 {
 
 	public static void main(String[] args) {
 		Estacionamento estacionamento = null;
