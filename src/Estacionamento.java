@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//Grupo: Amanda Cruz de Araújo, George Barbosa de Lima, Ian Ribeiro de Mendonça.
 
 public class Estacionamento {
 	
