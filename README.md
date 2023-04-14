@@ -16,3 +16,8 @@ Primeiro projeto da disciplina de Programação Orientada a Objetos IFPB 2023.1
 - O sistema gera um arquivo com o histórico de movimentação no estacionamento.
   - Nele são armazenadas a placa e a vaga ocupada pelo veículo, juntamente com a operação realizada(saída ou entrada) e os horários nas quais elas ocorreram;
   - As informações são registradas no fomato: data;vaga;"entrada ou saída".
+  
+## 💻 Equipe
+ - Amanda Cruz de Araújo; 
+ - George Barbosa de Lima;
+ - Ian Ribeiro de Mendonça.
