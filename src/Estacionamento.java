@@ -57,7 +57,6 @@ public class Estacionamento {
 				validada = false;
 				break;
 			}
-			else validada = true;
 		}
 		return validada;
 	}
@@ -186,7 +185,6 @@ public class Estacionamento {
 			arquivo.close(); //Salva alterações no arquivo e o fecha
 			
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			
 		}
 	}
@@ -201,7 +199,7 @@ public class Estacionamento {
 				String[] vagaPlaca = arquivo.nextLine().split(";"); // Salva um conjunto vaga;placa em um array
 				int vaga = Integer.parseInt(vagaPlaca[0]);
 				
-				if (vaga > placas.length) {
+				if (vaga > placas.length) { // Caso o arquivo de leitura seja de um estacionamento maior que o atual.
 					break;
 				}
 				
@@ -217,7 +215,6 @@ public class Estacionamento {
 				arquivo.close();
 				
 			} catch (Exception e2) {
-				System.out.println(e2.getMessage());
 				
 			}
 		}

@@ -76,7 +76,7 @@ public class Interface2 {
 				estacionamento = new Estacionamento(10);	//Estacionamento com 10 vagas
 				estacionamento.lerDados();					//Lendo os dados registrados
 						 
-			}catch (Exception e) {System.out.println("exceção0--->"+e.getMessage());}
+			}catch (Exception e) {}
 				
 		frame =new JFrame();
 		frame.setTitle("Estacionamento");
@@ -169,10 +169,10 @@ public class Interface2 {
 					String mensagemEntrada = e1.getMessage();
 					if (mensagemEntrada.equals("For input string: \"\"")){
 						label_mensagens.setText("");
-						JOptionPane.showMessageDialog(frame,"É preciso preencher os campus.", "", JOptionPane.WARNING_MESSAGE);
+						JOptionPane.showMessageDialog(frame,"É preciso preencher os campos.", "", JOptionPane.WARNING_MESSAGE);
 					}
 					else {label_mensagens.setText("");
-						JOptionPane.showMessageDialog(frame,mensagemEntrada, "Titulo", JOptionPane.WARNING_MESSAGE);}
+						JOptionPane.showMessageDialog(frame,mensagemEntrada, "", JOptionPane.WARNING_MESSAGE);}
 					
 				}
 			}
@@ -201,7 +201,7 @@ public class Interface2 {
 					String mensagemSaida = e1.getMessage();
 					if (mensagemSaida.equals("For input string: \"\"")){
 						label_mensagens.setText("");
-						JOptionPane.showMessageDialog(frame,"É preciso preencher os campus.", "", JOptionPane.WARNING_MESSAGE);}
+						JOptionPane.showMessageDialog(frame,"É preciso preencher os campos.", "", JOptionPane.WARNING_MESSAGE);}
 						//label_mensagens.setText("É preciso preencher os campus.");}
 					else {
 						label_mensagens.setText("");
@@ -261,7 +261,7 @@ public class Interface2 {
 					String mensagemTransf = e1.getMessage();
 					if (mensagemTransf.equals("For input string: \"\"")){
 						label_mensagens.setText("");
-						JOptionPane.showMessageDialog(frame,"É preciso preencher os campus.", "", JOptionPane.WARNING_MESSAGE);}
+						JOptionPane.showMessageDialog(frame,"É preciso preencher os campos.", "", JOptionPane.WARNING_MESSAGE);}
 	
 					else {
 						label_mensagens.setText("");
