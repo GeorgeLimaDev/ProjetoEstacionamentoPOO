@@ -49,6 +49,18 @@ public class Estacionamento {
 		
 		return false; //Se falhar na última validacao retorna false.
 	}
+
+	public boolean checarRepeticao(String placa) {
+		boolean validada = true;
+		for (int i = 0; i < placas.length; i++) {
+			if (placas[i].equals(placa)) {
+				validada = false;
+				break;
+			}
+			else validada = true;
+		}
+		return validada;
+	}
 	
 	//Método para registro de entrada de veículos
 	public void entrar(String placa, int vaga) throws Exception {
@@ -56,6 +68,10 @@ public class Estacionamento {
 		
 		if(! validarPlaca(placa)) { //Verifica se a placa é inválida
 			throw new Exception("Placa inválida, a placa deve ter formato YYY0000 ou YYY0X00");
+		}
+
+		if (!(checarRepeticao(placa))) {
+			throw new Exception("A placa informada já está no estacionamento.");
 		}
 		
 		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Verifica se a vaga existe.
