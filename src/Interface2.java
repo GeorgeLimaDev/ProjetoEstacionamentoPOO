@@ -1,5 +1,3 @@
-
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -17,8 +15,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-
 
 
 public class Interface2 {
@@ -77,13 +73,12 @@ public class Interface2 {
 		
 		//Criando o objeto estacionamento
 			try {
-				estacionamento = new Estacionamento(10);	//estacionamento com 10 vagas
+				estacionamento = new Estacionamento(10);	//Estacionamento com 10 vagas
 				estacionamento.lerDados();					//Lendo os dados registrados
-				System.out.println("Dados lidos");
-		 
+						 
 			}catch (Exception e) {System.out.println("exceção0--->"+e.getMessage());}
 				
-		frame = new JFrame();
+		frame =new JFrame();
 		frame.setTitle("Estacionamento");
 		frame.setBounds(100, 100, 608, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,62 +128,24 @@ public class Interface2 {
 		label_vagaDestino.setBounds(283, 127, 107, 51);
 		frame.getContentPane().add(label_vagaDestino);
 		
-		/*
-		//Permite gravar os dados
-		button_gravarDados = new JButton("Gravar Dados");
-		button_gravarDados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {					
-					estacionamento.gravarDados();
-					label_mensagens.setText("Dados gravados.");
-				}
-				catch (Exception e1) {label_mensagens.setText(e1.getMessage());}
-				
-				
-			}
-		});
-		button_gravarDados.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_gravarDados.setBounds(321, 259, 119, 45);
-		frame.getContentPane().add(button_gravarDados);
-		*/
-		
-		
-		/*
-		//Permite listar os dados
-		button_lerDados = new JButton("Ler Dados");
-		button_lerDados.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {					
-					estacionamento.lerDados();
-					label_mensagens.setText("Dados lidos?????");
-				}
-				catch (Exception e1) {label_mensagens.setText(e1.getMessage());}
-				
-			}
-		});
-		button_lerDados.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		button_lerDados.setBounds(442, 259, 107, 45);
-		frame.getContentPane().add(button_lerDados);
-		*/
-		
 		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 64));
 		panel.setBounds(24, 10, 531, 111);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
+
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(0, 0, 64));
+		panel_1.setBounds(24, 127, 531, 111);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
 		
-		//Permite registro de saída de veículos
-		button_sair = new JButton("Sair Veículo");
-		button_sair.setBounds(183, 59, 147, 42);
-		panel.add(button_sair);
-		button_sair.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		panel_2 = new JPanel();
+		panel_2.setBackground(new Color(0, 0, 64));
+		panel_2.setBounds(24, 248, 531, 56);
+		frame.getContentPane().add(panel_2);
+		panel_2.setLayout(null);
 		
-		//Permite consultar em qual vaga está o veículo de determinada placa
-		
-		button_consultar = new JButton("Consultar Placa");
-		button_consultar.setBounds(340, 59, 147, 42);
-		panel.add(button_consultar);
-		button_consultar.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		//Permite registro de entrada de veículos
 		
@@ -206,7 +163,6 @@ public class Interface2 {
 					
 					//Gravando os novos dados
 					estacionamento.gravarDados();
-					System.out.println("Dados gravados.");
 					
 				}
 				catch (Exception e1) {
@@ -214,32 +170,23 @@ public class Interface2 {
 					if (mensagemEntrada.equals("For input string: \"\"")){
 						label_mensagens.setText("");
 						JOptionPane.showMessageDialog(frame,"É preciso preencher os campus.", "", JOptionPane.WARNING_MESSAGE);
-						//label_mensagens.setText("É preciso preencher os campus.");
-						}
+					}
 					else {label_mensagens.setText("");
 						JOptionPane.showMessageDialog(frame,mensagemEntrada, "Titulo", JOptionPane.WARNING_MESSAGE);}
-						//label_mensagens.setText(mensagemEntrada);}
 					
 				}
 			}
 							
 		});
-		button_consultar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String placa = Placa.getText();
-				String vagaPlaca = Integer.toString(estacionamento.consultarPlaca(placa));
-				
-				if(vagaPlaca.equals("-1")) {
-					label_mensagens.setText("");
-					JOptionPane.showMessageDialog(frame,"A placa não está registrada.", "", JOptionPane.WARNING_MESSAGE);}
-					//label_mensagens.setText("A placa não está registrada.");}
-				
-				else {
-					label_mensagens.setText("O veículo de placa " + placa + " está na vaga " + vagaPlaca);}
-			}
-				
-			
-		});
+
+		
+	
+		//Permite registro de saída de veículos
+		
+		button_sair = new JButton("Sair Veículo");
+		button_sair.setBounds(183, 59, 147, 42);
+		panel.add(button_sair);
+		button_sair.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		button_sair.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {					
@@ -249,7 +196,6 @@ public class Interface2 {
 					
 					//Gravando os novos dados
 					estacionamento.gravarDados();
-					System.out.println("Dados gravados.");
 				}
 				catch (Exception e1) {
 					String mensagemSaida = e1.getMessage();
@@ -264,17 +210,39 @@ public class Interface2 {
 				}
 			}
 					
+		});		
+		
+		
+		//Permite consultar em qual vaga está o veículo de determinada placa
+		
+		button_consultar = new JButton("Consultar Placa");
+		button_consultar.setBounds(340, 59, 147, 42);
+		panel.add(button_consultar);
+		button_consultar.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		button_consultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String placa = Placa.getText();
+				String vagaPlaca = Integer.toString(estacionamento.consultarPlaca(placa));
+				
+				if(vagaPlaca.equals("-1")) {
+					label_mensagens.setText("");
+					JOptionPane.showMessageDialog(frame,"A placa não está registrada.", "", JOptionPane.WARNING_MESSAGE);}
+									
+				else {
+					label_mensagens.setText("O veículo de placa " + placa + " está na vaga " + vagaPlaca);}
+			}
+				
+			
 		});
 		
-		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(0, 0, 64));
-		panel_1.setBounds(24, 127, 531, 111);
-		frame.getContentPane().add(panel_1);
-		panel_1.setLayout(null);
+	
 		
 		//Permite transferir o veículo de vaga
+		
 		button_transferir = new JButton("Transferir Veículo");
 		button_transferir.setBounds(183, 59, 163, 42);
+		button_transferir.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		panel_1.add(button_transferir);
 		button_transferir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -287,7 +255,6 @@ public class Interface2 {
 					
 					//Gravando os novos dados
 					estacionamento.gravarDados();
-					System.out.println("Dados gravados.");
 				}
 				
 				catch (Exception e1) {
@@ -295,26 +262,23 @@ public class Interface2 {
 					if (mensagemTransf.equals("For input string: \"\"")){
 						label_mensagens.setText("");
 						JOptionPane.showMessageDialog(frame,"É preciso preencher os campus.", "", JOptionPane.WARNING_MESSAGE);}
-						//label_mensagens.setText("É preciso preencher os campus.");}
+	
 					else {
 						label_mensagens.setText("");
 						JOptionPane.showMessageDialog(frame,mensagemTransf, "", JOptionPane.WARNING_MESSAGE);}
-						//label_mensagens.setText(mensagemTransf);}
+						
 				}
 			}
 		});
-		button_transferir.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
-		panel_2 = new JPanel();
-		panel_2.setBackground(new Color(0, 0, 64));
-		panel_2.setBounds(24, 248, 531, 56);
-		frame.getContentPane().add(panel_2);
-		panel_2.setLayout(null);
 		
+
 						
 		//Permite listar as vagas livres
+		
 		button_listarVagasLivres = new JButton("Listar Vagas Livres");
 		button_listarVagasLivres.setBounds(267, 10, 163, 36);
+		button_listarVagasLivres.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_2.add(button_listarVagasLivres);
 		button_listarVagasLivres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -330,12 +294,13 @@ public class Interface2 {
 			}
 					
 		});
-		button_listarVagasLivres.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
 		
 		//Permite listar as vagas, informa se está livre e, se não, informa a placa do carro da vaga
 		
 		button_listarVagas = new JButton("Listar Vagas");
 		button_listarVagas.setBounds(94, 10, 163, 36);
+		button_listarVagas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_2.add(button_listarVagas);
 		button_listarVagas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,7 +312,7 @@ public class Interface2 {
 				
 			}
 		});
-		button_listarVagas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
 		
 		label_mensagens = new JLabel("");
 		label_mensagens.setBounds(60, 314, 475, 13);
