@@ -23,7 +23,7 @@ public class Estacionamento {
 		}
 	}
 	
-	//Método para validar placa, só permite placas no formato YYY0000 ou YYY0X00"
+	//Método para validar placa
 	private boolean validarPlaca(String placa) {
 		if(placa.length() != 7) {
 			return false;
@@ -33,8 +33,6 @@ public class Estacionamento {
 		String numeros = placa.substring(3,4) + placa.substring(5);
 		String letraOuNumero = placa.substring(4,5);
 		
-		System.out.println(letras + numeros + ":" + letraOuNumero);
-		
 		
 		if(! letras.matches("[A-Z]*")) {
 			return false;
@@ -43,7 +41,7 @@ public class Estacionamento {
 		
 		if(! numeros.matches("[0-9]*")) {
 			return false;
-		} //Verifica se o 4º digito e os 2 ultimos digitos são números.
+		} //Verifica se o 4º digito e os 2 últimos digitos são números.
 		
 		if (letraOuNumero.matches("[A-Z]*") || letraOuNumero.matches("[0-9]*"))
 			return true;
@@ -52,18 +50,18 @@ public class Estacionamento {
 		return false; //Se falhar na última validacao retorna false.
 	}
 	
-	
+	//Método para registro de entrada de veículos
 	public void entrar(String placa, int vaga) throws Exception {
 		placa = placa.toUpperCase();
 		
-		if(! validarPlaca(placa)) { //Validação da placa (verifica se ela tem formato YYY0000 ou YYY0X00"). 
+		if(! validarPlaca(placa)) { //Verifica se a placa é inválida
 			throw new Exception("Placa inválida, a placa deve ter formato YYY0000 ou YYY0X00");
 		}
 		
-		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Checa se a vaga existe.
+		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Verifica se a vaga existe.
 			throw new Exception("Número de vaga fora do limite do estacionamento, escolha uma vaga entre 1 e " + placas.length);
 		}
-		else if (!(placas[vaga-1].equals("livre"))) { // Checa se a vaga está ocupada.
+		else if (!(placas[vaga-1].equals("livre"))) { // Verifica se a vaga está ocupada.
 			throw new Exception("Vaga não está livre.");
 		}
 		
@@ -76,10 +74,10 @@ public class Estacionamento {
 		
 		FileWriter arquivo = new FileWriter(new File("historico.csv"), true); //Abre ou cria o arquivo.
 		arquivo.write(dataFormatada + ";" + vaga + ";" + placa + ";" + "entrada\n"); //Escreve no csv com o formato data;vaga;placa;entrada
-		arquivo.close(); //Salva alteracoes e fecha arquivo
+		arquivo.close(); //Salva alterações e fecha arquivo
 	}
 	
-	
+	//Método para registro de saída de veículos
 	public void sair(int vaga) throws Exception {
 		if (vaga-1 < 0 || vaga-1 >= placas.length ) { // Verifica se a vaga existe.
 			throw new Exception("Número de vaga fora do limite do estacionamento, escolha uma vaga entre 1 e " + placas.length);
@@ -98,10 +96,10 @@ public class Estacionamento {
 		
 		FileWriter arquivo = new FileWriter(new File("historico.csv"), true); //Abre o arquivo.
 		arquivo.write(dataFormatada + ";" + vaga + ";" + placa + ";" + "saida\n"); //Escreve no csv com o formato data;vaga;placa;saida
-		arquivo.close(); //Salva alteracoes e fecha arquivo
+		arquivo.close(); //Salva alterações e fecha arquivo
 	}
 	
-	
+	//Método para consultar em qual vaga está um veículo de determinada placa
 	public int consultarPlaca(String placa) {
 		placa = placa.toUpperCase();
 		
@@ -111,10 +109,10 @@ public class Estacionamento {
 				
 			}
 		}
-		return -1; //A confirmar: deve retornar esse valor padrão ou subir uma exceção?
+		return -1;
 	}
 	
-	
+	//Método para transferir um veículo de uma vaga(vaga1) para outra(vaga2)
 	public void transferir(int vaga1, int vaga2) throws Exception {
 		if (vaga1 - 1 < 0 || vaga1 - 1 >= placas.length ) { // Verifica se a vaga existe.
 			throw new Exception("Número da primeira vaga informada fora do limite do estacionamento, escolha uma vaga entre 1 e " + placas.length);
@@ -124,7 +122,7 @@ public class Estacionamento {
 			throw new Exception("Número da segunda vaga informada fora do limite do estacionamento, escolha uma vaga entre 1 e " + placas.length);
 		}
 		
-		if (!(placas[vaga2 - 1].equals("livre"))) { // Checa se a vaga está ocupada.
+		if (!(placas[vaga2 - 1].equals("livre"))) { // Verifica se a vaga está ocupada.
 			throw new Exception("Segunda vaga não está livre.");
 		}
 		
@@ -138,28 +136,17 @@ public class Estacionamento {
 	}
 	
 	
+	//Método para listar as vagas livres e ocupadas
 	public String[] listarGeral() {
 		return placas.clone();
-		
-		/*String[] listagem = new String[placas.length]; // Inicializa a lista a ser exibida.
-		
-		for (int i = 0; i < placas.length; i++) {
-			if (placas[i].equals("livre")) { // Testa se a vaga está livre.
-				listagem[i] = "livre";
-			}
-			else { // Caso ocupada, insere a placa ocupante da vaga.
-				listagem[i] = placas[i];
-			}
-		}
-		return listagem;*/
 	}
 
-	
+	//Método para listar as vagas livres
 	public ArrayList<Integer> listarLivres() {
 		ArrayList<Integer> listagemLivre = new ArrayList<>(); // Inicializa a lista a ser exibida.
 		
 		for (int i = 0; i < placas.length; i++) {
-			if (placas[i].equals("livre")) { // Testa se a vaga está livre
+			if (placas[i].equals("livre")) { // Verifica se a vaga está livre
 				listagemLivre.add(i+1);
 				
 			}
@@ -167,27 +154,29 @@ public class Estacionamento {
 		return listagemLivre;
 	}
 	
-	
+	//Método para gravar dados
 	public void gravarDados() {
+
 		try {
 			FileWriter arquivo = new FileWriter(new File("placas.csv")); //Cria ou abre arquivo
 			
 			for (int i = 0; i < placas.length; i++) {
-				if (! placas[i].equals("livre")) { //Checa se há um carro estacionado na vaga
+				if (! placas[i].equals("livre")) { //Verifica se há um carro estacionado na vaga
 					arquivo.write( (i + 1) + ";" + placas[i] + "\n" ); //Salva no csv no formato vaga;placa
 					
 				}
 			}
 			
-			arquivo.close(); //Salva alteracões no arquivo e o fecha
+			arquivo.close(); //Salva alterações no arquivo e o fecha
 			
 		} catch (Exception e) {
-			// Nào sei o que por aqui. O que diabos poderia causar uma excecao nisso?
+			System.out.println(e.getMessage());
 			
 		}
 	}
 	
 	
+	//Método para ler os dados
 	public void lerDados() {
 		try {
 			Scanner arquivo = new Scanner(new File("placas.csv")); //Tenta abrir arquivo para leitura
@@ -197,7 +186,7 @@ public class Estacionamento {
 				int vaga = Integer.parseInt(vagaPlaca[0]);
 				
 				if (vaga > placas.length) {
-					break; // N faz nada, o estacionamento terá menos carros, lide-se com isso :P
+					break;
 				}
 				
 				placas[vaga - 1] = vagaPlaca[1]; 
@@ -212,7 +201,7 @@ public class Estacionamento {
 				arquivo.close();
 				
 			} catch (Exception e2) {
-				// Nào sei o que por aqui. O que diabos poderia causar uma excecao nisso?
+				System.out.println(e2.getMessage());
 				
 			}
 		}
