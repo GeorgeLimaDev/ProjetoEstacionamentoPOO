@@ -50,7 +50,7 @@ public class Estacionamento {
 		return false; //Se falhar na última validacao retorna false.
 	}
 
-	public boolean checarRepeticao(String placa) {
+	private boolean checarRepeticao(String placa) {
 		boolean validada = true;
 		for (int i = 0; i < placas.length; i++) {
 			if (placas[i].equals(placa)) {
