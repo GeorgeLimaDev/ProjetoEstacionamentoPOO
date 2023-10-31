@@ -1,4 +1,4 @@
-# ProjetoEstacionamentoPOO
+# Gerenciador de Vagas
 
 Primeiro projeto da disciplina de Programação Orientada a Objetos IFPB 2023.1
 
